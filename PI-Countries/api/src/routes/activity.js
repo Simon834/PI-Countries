@@ -1,9 +1,17 @@
 const { Router } = require("express");
 const router = Router();
-const axios = require("axios").default;
+const { Activity, Country } = require("../db");
 
-router.post("/", (req, res) => {
-  res.json("funciona el post");
+router.post("/", async (req, res) => {
+  const { name, difficulty, duration, season, countries } = req.body;
+  const createdActivity = await Activity.create({
+    name,
+    difficulty,
+    duration,
+    season,
+  });
+  await createdActivity.addCountries(countries);
+  res.json(createdActivity);
 });
 
 module.exports = router;
