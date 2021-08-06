@@ -2,25 +2,25 @@ const { Router } = require("express");
 const router = Router();
 const axios = require("axios").default;
 const { Country, Activity } = require("../db.js");
+const { Op } = require("sequelize");
 
 const ApiURL = "https://restcountries.eu/rest/v2/all";
 
-router.get("/", async (req, res) => {
+//Ruta para obtener un listado de paises, si se pasa un nombre por query, devolver el resultado de la busqueda
+router.get("/", async (req, res, next) => {
   let { name } = req.query;
 
-  if (!name) {
-    // obtener listado de paises, la primera vez debe cargar todos los paises a la base de datos
+  try {
+    if (!name) {
+      // obtener listado de paises, la primera vez debe cargar todos los paises a la base de datos
 
-    const fullDb = await Country.findAll();
+      const fullDb = await Country.findAll();
 
-    if (!fullDb.length) {
-      try {
+      if (!fullDb.length) {
         const response = await axios.get(ApiURL);
         const data = response.data;
-        const mappedData = [];
-
-        data.map((r) =>
-          mappedData.push({
+        const mappedData = data.map((r) => {
+          return {
             name: r.name,
             ID: r.alpha3Code,
             flagImg: r.flag,
@@ -29,34 +29,63 @@ router.get("/", async (req, res) => {
             subregion: r.subregion,
             area: r.area,
             population: r.population,
-          })
-        );
+            currency: r.currency,
+          };
+        });
         const countryList = await Country.bulkCreate(mappedData);
-        const names = countryList.map((p) => p.name);
+        const names = countryList.map((p) => {
+          return {
+            name: p.name,
+            flagImg: p.flagImg,
+            ID: p.ID,
+            region: p.region,
+          };
+        });
         res.json(names);
-      } catch (error) {
-        res.json(error);
+      } else {
+        const countryList = await Country.findAll();
+        const names = countryList.map((p) => {
+          return {
+            name: p.name,
+            flagImg: p.flagImg,
+            ID: p.ID,
+            region: p.region,
+          };
+        });
+        return res.json(names);
       }
+
+      // Si no tiene query
     } else {
-      const countryList = await Country.findAll();
-      const names = countryList.map((p) => p.name);
-      res.json(names);
+      // name = name.toLowerCase();
+      // const countriesList = await Country.findAll();
+      // const countriesMatch = countriesList.filter((p) =>
+      //   p.name.toLowerCase().includes(name)
+      // );
+
+      const findDatabase = await Country.findAll({
+        where: {
+          name: {
+            [Op.iLike]: `%${name}%`,
+          },
+        },
+        include: Activity,
+      });
+
+      if (findDatabase) {
+        return res.json(findDatabase);
+      } else {
+        return res.json("No countries found");
+      }
     }
-  } else {
-    name = name.toLowerCase();
-    const countriesList = await Country.findAll();
-    const countriesMatch = countriesList.filter((p) =>
-      p.name.toLowerCase().includes(name)
-    );
-    if (countriesMatch.length) {
-      res.json(countriesMatch);
-    } else {
-      res.json("No countries found");
-    }
+  } catch (error) {
+    next(error);
   }
 });
 
-router.get("/:idPais", async (req, res) => {
+//Ruta busqueda de pais por ID (params)
+
+router.get("/:idPais", async (req, res, next) => {
   const idSearch = req.params.idPais.toUpperCase();
 
   try {
@@ -65,7 +94,7 @@ router.get("/:idPais", async (req, res) => {
     });
     res.json(countrySearch);
   } catch (error) {
-    res.send(error);
+    next(error);
   }
 });
 
