@@ -1,0 +1,28 @@
+/* .flag {
+  height: auto;
+  width: auto;
+  max-width: 300px;
+  max-height: 300px;
+} */
+.roundedflag {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+
+  align-content: center;
+}
+
+img {
+  display: block;
+  margin: auto;
+  height: 100%;
+  width: 120%;
+}
+.card {
+  width: 300px;
+  height: 250px;
+  border: 1px solid;
+  padding: 20px;
+  margin: 10px;
+}

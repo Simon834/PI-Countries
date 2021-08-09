@@ -5,7 +5,9 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import store from "./store/index";
+import configureStore from "./store/store";
+
+const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
