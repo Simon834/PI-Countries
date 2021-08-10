@@ -2,39 +2,42 @@ import "./NavBarStyles.css";
 import { useState } from "react";
 import { getCountriesName } from "../../actions";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export default function NavBar() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const [search, setSearch] = useState({
-    countrySearch: "",
-  });
+  const [search, setSearch] = useState("");
 
   const handleChange = (e) => {
-    setSearch({
-      ...search,
-      countrySearch: e.target.value,
-    });
+    setSearch(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(getCountriesName(search.countrySearch));
+    dispatch(getCountriesName(search));
+    history.push(`/searchResult/${search}`);
+    e.target.reset();
+    setSearch("");
   };
   return (
     <>
       <div className="NavBar">
         <div>Titulo</div>
-        <div>Logo!!!!</div>
-
-        <input
-          type="text"
-          placeholder="Type a country name..."
-          onChange={(e) => handleChange(e)}
-        />
-        <Link to={`/searchResults`}>
-          <button onClick={(e) => handleSubmit(e)}>Search</button>
+        <Link to="/home">
+          <div>Logo!!!!</div>
+        </Link>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <input
+            type="text"
+            placeholder="Type a country name..."
+            onChange={(e) => handleChange(e)}
+          />
+          <input type="submit" value="Search" />
+        </form>
+        <Link to="/createactivity">
+          <div>Create your own Activity!</div>
         </Link>
       </div>
     </>

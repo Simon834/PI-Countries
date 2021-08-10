@@ -41,7 +41,10 @@ router.get("/", async (req, res, next) => {
             region: p.region,
           };
         });
-        res.json(names);
+
+        const slicedNames = names.slice(0, 9);
+
+        res.json(slicedNames);
       } else {
         const countryList = await Country.findAll();
         const names = countryList.map((p) => {
@@ -52,7 +55,9 @@ router.get("/", async (req, res, next) => {
             region: p.region,
           };
         });
-        return res.json(names);
+        const slicedNames = names.slice(0, 9);
+
+        return res.json(slicedNames);
       }
 
       // Si no tiene query

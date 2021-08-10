@@ -4,6 +4,7 @@ export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_COUNTRY_NAME = "GET_COUNTRY_NAME";
 export const GET_COUNTRY_ID = "GET_COUNTRY_ID";
 export const POST_ACTIVITY = "POST_COUNTRY";
+export const CLEAR_DETAIL = "CLEAR_DETAIL";
 
 const backURL = "http://localhost:3001";
 
@@ -31,10 +32,14 @@ export const getCountriesID = (ID) => {
   };
 };
 
-export const postActivity = () => {
+export const postActivity = (activity) => {
   return async (dispatch) => {
-    const request = await axios.get(`${backURL}/countries`);
-    const data = request.data;
-    return dispatch({ type: POST_ACTIVITY, payload: data });
+    const request = await axios.post(`${backURL}/activity`, activity);
+
+    return dispatch({ type: POST_ACTIVITY, payload: "" });
   };
+};
+
+export const clearDetail = () => {
+  return (dispatch) => dispatch({ type: CLEAR_DETAIL, payload: {} });
 };

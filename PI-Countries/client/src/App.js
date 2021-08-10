@@ -4,8 +4,9 @@ import { Route, Switch } from "react-router-dom";
 import Home from "./views/Home/home";
 import NavBar from "./components/navBar/NavBar";
 import SearchID from "./views/SearchByID/searchID";
+import SearchResult from "./views/searchResults/searchResults";
 import { useLocation } from "react-router-dom";
-import SearchResults from "./views/searchResults/searchResults";
+import CreateActivity from "./views/createActivity/createActivity";
 
 function App() {
   const location = useLocation();
@@ -15,8 +16,9 @@ function App() {
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/home" component={Home} />
+        <Route exact path="/searchResult/:name" component={SearchResult} />
         <Route path="/search/:ID" component={SearchID} />
-        <Route exact path="/searchResults" component={SearchResults} />
+        <Route exact path="/createactivity" component={CreateActivity} />
       </Switch>
     </div>
   );

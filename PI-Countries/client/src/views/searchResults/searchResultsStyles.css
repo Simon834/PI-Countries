@@ -1,0 +1,8 @@
+.cards {
+  display: grid;
+  grid-template-rows: 200px 200px 200px;
+  grid-template-columns: 200px 200px 200px;
+  justify-content: space-evenly;
+  transform-style: preserve-3d;
+  margin-top: auto;
+}
