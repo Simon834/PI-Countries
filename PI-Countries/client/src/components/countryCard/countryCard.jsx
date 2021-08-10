@@ -4,10 +4,10 @@ export default function CountryCard(props) {
   return (
     <>
       <div className="card">
-        <div className="roundedflag">
+        <div>
           <img className="flag" src={props.flagImg} alt={props.name} />
         </div>
-        <h2>{props.name}</h2>
+        <div className="cardName">{props.name}</div>
         <div>{props.region}</div>
       </div>
     </>

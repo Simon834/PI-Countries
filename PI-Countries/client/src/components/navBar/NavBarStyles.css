@@ -1,0 +1,7 @@
+.NavBar {
+  display: flex;
+  background-color: grey;
+  justify-content: space-around;
+  height: max-content;
+  padding: 20px;
+}

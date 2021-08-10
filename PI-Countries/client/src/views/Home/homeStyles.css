@@ -3,6 +3,6 @@ ul {
   display: flex;
   flex-wrap: wrap;
 }
-/* li {
+li {
   margin: 20px;
-} */
+}

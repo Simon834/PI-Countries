@@ -1,28 +1,21 @@
-/* .flag {
-  height: auto;
-  width: auto;
-  max-width: 300px;
-  max-height: 300px;
-} */
-.roundedflag {
-  width: 100px;
-  height: 100px;
-  position: relative;
-  overflow: hidden;
-
-  align-content: center;
-}
-
 img {
-  display: block;
-  margin: auto;
-  height: 100%;
-  width: 120%;
+  display: inline;
+  margin: 0 auto;
+  height: 95px;
+  width: 150px;
+  object-fit: cover;
 }
+
 .card {
-  width: 300px;
-  height: 250px;
-  border: 1px solid;
-  padding: 20px;
-  margin: 10px;
+  display: inline-block;
+  border: 2px solid;
+  padding: 5px;
+}
+
+.cardName {
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  overflow: hidden;
+  display: inline-block;
 }
