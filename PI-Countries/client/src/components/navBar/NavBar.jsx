@@ -24,9 +24,8 @@ export default function NavBar() {
   return (
     <>
       <div className="NavBar">
-        <div>Titulo</div>
         <Link to="/home">
-          <div>Logo!!!!</div>
+          <div>Home!!!!</div>
         </Link>
         <form onSubmit={(e) => handleSubmit(e)}>
           <input

@@ -42,9 +42,9 @@ router.get("/", async (req, res, next) => {
           };
         });
 
-        const slicedNames = names.slice(0, 9);
+        // const slicedNames = names.slice(0, 9);
 
-        res.json(slicedNames);
+        res.json(names);
       } else {
         const countryList = await Country.findAll();
         const names = countryList.map((p) => {
@@ -55,9 +55,9 @@ router.get("/", async (req, res, next) => {
             region: p.region,
           };
         });
-        const slicedNames = names.slice(0, 9);
+        //const slicedNames = names.slice(0, 9);
 
-        return res.json(slicedNames);
+        return res.json(names);
       }
 
       // Si no tiene query
@@ -95,9 +95,41 @@ router.get("/:idPais", async (req, res, next) => {
 
   try {
     const countrySearch = await Country.findByPk(idSearch, {
-      include: Activity,
+      include: [
+        {
+          model: Activity,
+          as: "activities",
+          through: { attributes: [] }, //<-- this line will prevent mapping object from being added
+        },
+      ],
     });
-    res.json(countrySearch);
+    const {
+      name,
+      ID,
+      region,
+      subregion,
+      activities,
+      flagImg,
+      capital,
+      area,
+      population,
+    } = countrySearch;
+
+    const result = {
+      name,
+      ID,
+      region,
+      subregion,
+      activities: activities.map((p) => {
+        return { name: p.name, ID: p.ID };
+      }),
+      flagImg,
+      capital,
+      area,
+      population,
+    };
+
+    res.json(result);
   } catch (error) {
     next(error);
   }

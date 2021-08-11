@@ -34,7 +34,7 @@ export const getCountriesID = (ID) => {
 
 export const postActivity = (activity) => {
   return async (dispatch) => {
-    const request = await axios.post(`${backURL}/activity`, activity);
+    await axios.post(`${backURL}/activity`, activity);
 
     return dispatch({ type: POST_ACTIVITY, payload: "" });
   };

@@ -1,0 +1,10 @@
+.DetailContainer {
+  display: inline-block;
+  justify-content: center;
+  justify-self: center;
+  border: solid 2px;
+  height: fit-content;
+  width: fit-content;
+  padding: auto;
+  margin-top: 50px;
+}

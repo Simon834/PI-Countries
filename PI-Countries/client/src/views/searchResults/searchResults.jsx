@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { useSelector } from "react-redux";
-import "./searchResultsStyles.css";
+//import "./searchResultsStyles.css";
 
 //import { getCountries } from "../../actions";
 import CountryCard from "../../components/countryCard/countryCard";
