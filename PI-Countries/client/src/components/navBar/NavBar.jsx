@@ -1,6 +1,6 @@
 import "./NavBarStyles.css";
 import { useState } from "react";
-import { getCountriesName } from "../../actions";
+import { getCountries, getCountriesName } from "../../actions";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
@@ -21,12 +21,17 @@ export default function NavBar() {
     e.target.reset();
     setSearch("");
   };
+  const handleCountries = (e) => {
+    e.preventDefault();
+    dispatch(getCountries());
+  };
   return (
     <>
       <div className="NavBar">
         <Link to="/home">
           <div>Home!!!!</div>
         </Link>
+        <button onClick={(e) => handleCountries(e)}>get Countries</button>
         <form onSubmit={(e) => handleSubmit(e)}>
           <input
             type="text"

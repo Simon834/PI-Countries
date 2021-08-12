@@ -6,18 +6,18 @@ import "./homeStyles.css";
 import { getCountries } from "../../actions";
 import CountryCard from "../../components/countryCard/countryCard";
 import Pagination from "../../components/Pagination/Pagination";
+import Options from "../../components/options/options";
 
 export default function Home() {
   const countries = useSelector((store) => store.countries);
   const dispatch = useDispatch();
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([...countries]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setCostsPerPage] = useState(9);
 
   useEffect(() => {
-    dispatch(getCountries());
     setPosts(countries);
-  }, [posts]);
+  }, [countries]);
 
   //otener los paises que se muestran por pagina
 
@@ -25,12 +25,11 @@ export default function Home() {
   const indexOfFP = indexOfLP - postsPerPage;
   const currentPosts = posts.slice(indexOfFP, indexOfLP);
 
-  console.log(currentPosts);
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
+      <Options />
       <ul className="cards">
         {currentPosts.map((p) => (
           <li key={p.ID}>

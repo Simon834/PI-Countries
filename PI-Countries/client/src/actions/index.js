@@ -5,6 +5,7 @@ export const GET_COUNTRY_NAME = "GET_COUNTRY_NAME";
 export const GET_COUNTRY_ID = "GET_COUNTRY_ID";
 export const POST_ACTIVITY = "POST_COUNTRY";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
+export const ORDER_FILTER = "ORDER_FILTER";
 
 const backURL = "http://localhost:3001";
 
@@ -40,6 +41,8 @@ export const postActivity = (activity) => {
   };
 };
 
-export const clearDetail = () => {
-  return (dispatch) => dispatch({ type: CLEAR_DETAIL, payload: {} });
+export const orderFilter = (type) => {
+  return (dispatch) => {
+    return dispatch({ type: ORDER_FILTER, payload: type });
+  };
 };

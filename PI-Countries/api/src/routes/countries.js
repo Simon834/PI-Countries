@@ -39,6 +39,7 @@ router.get("/", async (req, res, next) => {
             flagImg: p.flagImg,
             ID: p.ID,
             region: p.region,
+            population: p.population,
           };
         });
 
@@ -53,6 +54,7 @@ router.get("/", async (req, res, next) => {
             flagImg: p.flagImg,
             ID: p.ID,
             region: p.region,
+            population: p.population,
           };
         });
         //const slicedNames = names.slice(0, 9);
