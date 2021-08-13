@@ -1,5 +1,7 @@
 import axios from "axios";
 
+export const GET_ACTIVITIES = "GET_ACTIVITIES";
+export const GET_REGIONS = "GET_REGIONS";
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_COUNTRY_NAME = "GET_COUNTRY_NAME";
 export const GET_COUNTRY_ID = "GET_COUNTRY_ID";
@@ -8,6 +10,21 @@ export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const ORDER_FILTER = "ORDER_FILTER";
 
 const backURL = "http://localhost:3001";
+
+export const getRegions = () => {
+  return async (dispatch) => {
+    const request = await axios.get(`${backURL}/aux/regions`);
+    const data = request.data;
+    return dispatch({ type: GET_REGIONS, payload: data });
+  };
+};
+export const getActivities = () => {
+  return async (dispatch) => {
+    const request = await axios.get(`${backURL}/aux/activities`);
+    const data = request.data;
+    return dispatch({ type: GET_ACTIVITIES, payload: data });
+  };
+};
 
 export const getCountries = () => {
   return async (dispatch) => {
@@ -41,8 +58,8 @@ export const postActivity = (activity) => {
   };
 };
 
-export const orderFilter = (type) => {
+export const orderFilter = (type, data) => {
   return (dispatch) => {
-    return dispatch({ type: ORDER_FILTER, payload: type });
+    return dispatch({ type: ORDER_FILTER, payload: { type, data } });
   };
 };

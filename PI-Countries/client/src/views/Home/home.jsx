@@ -10,14 +10,26 @@ import Options from "../../components/options/options";
 
 export default function Home() {
   const countries = useSelector((store) => store.countries);
+  const filteredCountries = useSelector((state) => state.filteredCountries);
+  const filteredBy = useSelector((state) => state.filteredBy);
+  const orderedBy = useSelector((state) => state.orderedBy);
   const dispatch = useDispatch();
-  const [posts, setPosts] = useState([...countries]);
+  const [posts, setPosts] = useState(countries);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setCostsPerPage] = useState(9);
+  const [postsPerPage] = useState(9);
 
   useEffect(() => {
-    setPosts(countries);
-  }, [countries]);
+    dispatch(getCountries()); // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    if (filteredBy === "All" && orderedBy === "All") {
+      setPosts(countries);
+    } else {
+      setPosts(filteredCountries);
+    }
+    setCurrentPage(1);
+  }, [countries, filteredCountries, filteredBy, orderedBy]);
 
   //otener los paises que se muestran por pagina
 
@@ -30,19 +42,7 @@ export default function Home() {
   return (
     <>
       <Options />
-      <ul className="cards">
-        {currentPosts.map((p) => (
-          <li key={p.ID}>
-            <Link to={`/search/${p.ID}`}>
-              <CountryCard
-                name={p.name}
-                region={p.region}
-                flagImg={p.flagImg}
-              />
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <CountryCard countries={currentPosts} />
       <Pagination
         postPerPage={postsPerPage}
         totalPosts={posts.length}

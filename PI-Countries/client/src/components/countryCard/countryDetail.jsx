@@ -28,12 +28,12 @@ export default function CountryDetail(props) {
             <ul>
               Here is a list of activities you can check during your visit:
               {props.activities.map((p) => {
-                return <li key={p.ID}>{p.name}</li>;
+                return <li key={p.ID}>{p.name}</li>; //iashfoai
               })}
             </ul>
           </div>
         </p>
       </div>
     </>
-  );
+  ); //hih
 }

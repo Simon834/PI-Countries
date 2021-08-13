@@ -1,15 +1,24 @@
 import "./countryCard.css";
+import { Link } from "react-router-dom";
 
 export default function CountryCard(props) {
   return (
     <>
-      <div className="card">
-        <div>
-          <img className="flag" src={props.flagImg} alt={props.name} />
-        </div>
-        <div className="cardName">{props.name}</div>
-        <div>{props.region}</div>
-      </div>
+      <ul className="cards">
+        {props.countries.map((p) => (
+          <li key={p.ID}>
+            <Link to={`/search/${p.ID}`}>
+              <div className="card">
+                <div>
+                  <img className="flag" src={p.flagImg} alt={p.name} />
+                </div>
+                <div className="cardName">{p.name}</div>
+                <div>{p.region}</div>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }

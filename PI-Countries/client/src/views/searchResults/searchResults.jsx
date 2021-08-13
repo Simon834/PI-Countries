@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 //import { getCountries } from "../../actions";
 import CountryCard from "../../components/countryCard/countryCard";
+import Options from "../../components/options/options";
 
 export default function SearchResult(props) {
   const countries = useSelector((store) => store.countrySearch);

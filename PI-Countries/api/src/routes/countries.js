@@ -47,7 +47,16 @@ router.get("/", async (req, res, next) => {
 
         res.json(names);
       } else {
-        const countryList = await Country.findAll();
+        const countryList = await Country.findAll({
+          include: [
+            {
+              model: Activity,
+              // as: "activities",
+              // through: { attributes: [] }, //<-- this line will prevent mapping object from being added
+            },
+          ],
+        });
+
         const names = countryList.map((p) => {
           return {
             name: p.name,
@@ -55,6 +64,7 @@ router.get("/", async (req, res, next) => {
             ID: p.ID,
             region: p.region,
             population: p.population,
+            activities: p.activities.map((p) => p.name),
           };
         });
         //const slicedNames = names.slice(0, 9);
