@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./homeStyles.css";
@@ -11,7 +10,8 @@ import Options from "../../components/options/options";
 export default function Home() {
   const countries = useSelector((store) => store.countries);
   const filteredCountries = useSelector((state) => state.filteredCountries);
-  const filteredBy = useSelector((state) => state.filteredBy);
+  const filteredByRegion = useSelector((state) => state.filteredByRegion);
+  const filteredByActivity = useSelector((state) => state.filteredByActivity);
   const orderedBy = useSelector((state) => state.orderedBy);
   const dispatch = useDispatch();
   const [posts, setPosts] = useState(countries);
@@ -23,13 +23,23 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (filteredBy === "All" && orderedBy === "All") {
+    if (
+      filteredByRegion === "All" &&
+      orderedBy === "All" &&
+      filteredByActivity === "All"
+    ) {
       setPosts(countries);
     } else {
       setPosts(filteredCountries);
     }
     setCurrentPage(1);
-  }, [countries, filteredCountries, filteredBy, orderedBy]);
+  }, [
+    countries,
+    filteredCountries,
+    filteredByRegion,
+    orderedBy,
+    filteredByActivity,
+  ]);
 
   //otener los paises que se muestran por pagina
 
@@ -41,13 +51,15 @@ export default function Home() {
 
   return (
     <>
-      <Options />
-      <CountryCard countries={currentPosts} />
-      <Pagination
-        postPerPage={postsPerPage}
-        totalPosts={posts.length}
-        paginate={paginate}
-      />
+      <div className="homeContainer">
+        <Options />
+        <CountryCard countries={currentPosts} />
+        <Pagination
+          postPerPage={postsPerPage}
+          totalPosts={posts.length}
+          paginate={paginate}
+        />
+      </div>
     </>
   );
 }

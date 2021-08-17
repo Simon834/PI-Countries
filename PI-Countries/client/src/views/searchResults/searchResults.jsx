@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 //import { getCountries } from "../../actions";
 import CountryCard from "../../components/countryCard/countryCard";
-import Options from "../../components/options/options";
 
 export default function SearchResult(props) {
   const countries = useSelector((store) => store.countrySearch);
@@ -14,19 +13,7 @@ export default function SearchResult(props) {
   return (
     <>
       <h2>Showing search results for: "{search}"</h2>
-      <ul className="cards">
-        {countries?.map((p) => (
-          <li key={p.ID}>
-            <Link to={`/search/${p.ID}`}>
-              <CountryCard
-                name={p.name}
-                region={p.region}
-                flagImg={p.flagImg}
-              />
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <CountryCard countries={countries} />
     </>
   );
 }

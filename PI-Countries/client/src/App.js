@@ -11,7 +11,7 @@ import CreateActivity from "./views/createActivity/createActivity";
 function App() {
   const location = useLocation();
   return (
-    <div className="App">
+    <>
       {location.pathname === "/" ? null : <NavBar />}
       <Switch>
         <Route exact path="/" component={LandingPage} />
@@ -20,7 +20,7 @@ function App() {
         <Route path="/search/:ID" component={SearchID} />
         <Route exact path="/createactivity" component={CreateActivity} />
       </Switch>
-    </div>
+    </>
   );
 }
 

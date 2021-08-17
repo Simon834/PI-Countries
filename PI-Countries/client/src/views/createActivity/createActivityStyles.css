@@ -5,7 +5,7 @@
   border: 5px solid #ffff00;
   padding: 10px;
 }
-input[type="text"],
+/* input[type="text"],
 select {
   width: 100%;
   padding: 12px 20px;
@@ -14,11 +14,11 @@ select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-}
+} */
 
-input[type="submit"] {
+.submitActivity {
   width: 100%;
-  background-color: #4caf50;
+  background-color: #23b5d3;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -27,11 +27,6 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-input[type="submit"]:hover {
-  background-color: #45a049;
-}
-div {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 5px;
+.submitActivity:hover {
+  background-color: #279af1;
 }

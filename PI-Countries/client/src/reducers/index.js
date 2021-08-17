@@ -8,6 +8,7 @@ import {
   ORDER_FILTER,
   // POST_ACTIVITY,
 } from "../actions/index";
+import { funcionPrueba } from "./reducerFunctions";
 
 const initialState = {
   countries: [],
@@ -16,8 +17,9 @@ const initialState = {
   countryDetail: [],
   regions: [],
   filteredCountries: [],
-  filteredBy: "All",
+  filteredByRegion: "All",
   orderedBy: "All",
+  filteredByActivity: "All",
 };
 
 function rootReducer(state = initialState, action) {
@@ -44,60 +46,122 @@ function rootReducer(state = initialState, action) {
     case ORDER_FILTER:
       switch (action.payload.type) {
         case "Allorder":
-          return { ...state, filteredBy: "All" };
+          return { ...state, orderedBy: "All" };
         case "nameAZ":
-          return {
-            ...state,
-            filteredCountries: Array.from(
-              state.filteredCountries.sort((a, b) =>
+          if (
+            state.filteredByRegion !== "All" &&
+            state.filteredByActivity !== "All"
+          ) {
+            return {
+              ...state,
+              filteredCountries: [...state.filteredCountries].sort((a, b) =>
+                a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+              ),
+
+              orderedBy: action.payload.type,
+            };
+          } else {
+            console.log("entre al else");
+            console.log(
+              [...state.countries].sort((a, b) =>
                 a.name > b.name ? 1 : b.name > a.name ? -1 : 0
               )
-            ),
+            );
+            return {
+              ...state,
+              filteredCountries: [...state.countries].sort((a, b) =>
+                a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+              ),
 
-            orderedBy: action.payload.type,
-          };
+              orderedBy: action.payload.type,
+            };
+          }
         case "nameZA":
-          return {
-            ...state,
-            filteredCountries: Array.from(
-              state.filteredCountries.sort((a, b) =>
+          if (
+            state.filteredByRegion !== "All" &&
+            state.filteredByActivity !== "All"
+          ) {
+            return {
+              ...state,
+              filteredCountries: [...state.filteredCountries].sort((a, b) =>
                 a.name < b.name ? 1 : b.name < a.name ? -1 : 0
-              )
-            ),
+              ),
 
-            orderedBy: action.payload.type,
-          };
+              orderedBy: action.payload.type,
+            };
+          } else {
+            return {
+              ...state,
+              filteredCountries: [...state.countries].sort((a, b) =>
+                a.name < b.name ? 1 : b.name < a.name ? -1 : 0
+              ),
+
+              orderedBy: action.payload.type,
+            };
+          }
         case "popH2L":
-          return {
-            ...state,
-            filteredCountries: Array.from(
-              state.filteredCountries.sort((a, b) =>
+          if (
+            state.filteredByRegion !== "All" &&
+            state.filteredByActivity !== "All"
+          ) {
+            return {
+              ...state,
+              filteredCountries: [...state.filteredCountries].sort((a, b) =>
                 a.population < b.population
                   ? 1
                   : b.population < a.population
                   ? -1
                   : 0
-              )
-            ),
+              ),
 
-            orderedBy: action.payload.type,
-          };
+              orderedBy: action.payload.type,
+            };
+          } else {
+            return {
+              ...state,
+              filteredCountries: [...state.countries].sort((a, b) =>
+                a.population < b.population
+                  ? 1
+                  : b.population < a.population
+                  ? -1
+                  : 0
+              ),
+
+              orderedBy: action.payload.type,
+            };
+          }
 
         case "popL2H":
-          return {
-            ...state,
-            filteredCountries: Array.from(
-              state.filteredCountries.sort((a, b) =>
+          if (
+            state.filteredByRegion !== "All" &&
+            state.filteredByActivity !== "All"
+          ) {
+            return {
+              ...state,
+              filteredCountries: [...state.filteredCountries].sort((a, b) =>
                 a.population > b.population
                   ? 1
                   : b.population > a.population
                   ? -1
                   : 0
-              )
-            ),
+              ),
 
-            orderedBy: action.payload.type,
-          };
+              orderedBy: action.payload.type,
+            };
+          } else {
+            return {
+              ...state,
+              filteredCountries: [...state.countries].sort((a, b) =>
+                a.population > b.population
+                  ? 1
+                  : b.population > a.population
+                  ? -1
+                  : 0
+              ),
+
+              orderedBy: action.payload.type,
+            };
+          }
 
         case "filterRegion":
           let region = action.payload.data;
@@ -110,7 +174,7 @@ function rootReducer(state = initialState, action) {
             return {
               ...state,
               filteredCountries: [...filteredRegions],
-              filteredBy: region,
+              filteredByRegion: region,
             };
           } else {
             return { ...state };
@@ -126,7 +190,7 @@ function rootReducer(state = initialState, action) {
             return {
               ...state,
               filteredCountries: [...filteredActivities],
-              filteredBy: activity,
+              filteredByActivity: activity,
             };
           } else {
             return { ...state };

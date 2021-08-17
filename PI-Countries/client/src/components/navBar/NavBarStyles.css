@@ -1,7 +1,65 @@
 .NavBar {
   display: flex;
-  background-color: grey;
-  justify-content: space-around;
+  background-color: #070600;
+  justify-content: space-between;
   height: max-content;
-  padding: 20px;
+  padding: 10px;
+  color: #f7f7ff;
+}
+
+.searchBox {
+  background: #23b5d3;
+  height: 40px;
+  border-radius: 40px;
+  padding: 5px;
+}
+
+.searchBox:hover > .searchInput {
+  width: 240px;
+  padding: 0 6px;
+}
+
+.searchBox:hover > .searchButton {
+  background: #f7f7ff;
+  color: #279af1;
+}
+
+.searchButton {
+  color: #f7f7ff;
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #279af1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+}
+
+.searchInput {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: #f7f7ff;
+  font-size: 14px;
+  transition: 0.4s;
+  line-height: 40px;
+  width: 0px;
+}
+.searchInput::placeholder {
+  color: #f7f7ff;
+}
+
+@media screen and (max-width: 620px) {
+  .searchBox:hover > .searchInput {
+    width: 150px;
+    padding: 0 6px;
+  }
+}
+.logo {
+  height: 40px;
+  object-fit: contain;
 }

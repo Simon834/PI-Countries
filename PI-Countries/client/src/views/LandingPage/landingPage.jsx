@@ -1,14 +1,20 @@
 import { Link } from "react-router-dom";
-import { getActivities, getCountries, getRegions } from "../../actions";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import "./landingPageStyles.css";
+// import { getActivities, getCountries, getRegions } from "../../actions";
+// import { useDispatch } from "react-redux";
+// import { useEffect } from "react";
 
 export default function LandingPage() {
   return (
-    <>
+    <div className="mainLP">
+      <div>
+        <h1 className="title">WELCOME TO YOUR TRAVEL COMPANION</h1>
+      </div>
       <Link to="/home">
-        <button>Go Home!</button>
+        <div className="buttonContainer">
+          <button className="homeButton">START YOUR ADVENTURE HERE!</button>
+        </div>
       </Link>
-    </>
+    </div>
   );
 }

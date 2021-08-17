@@ -12,7 +12,7 @@ export default function SearchID(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCountriesID(id));
+    dispatch(getCountriesID(id)); // eslint-disable-next-line
   }, []);
 
   if (id !== countryDetail.ID) {

@@ -10,7 +10,7 @@ export default function CreateActivity() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCountries());
+    dispatch(getCountries()); // eslint-disable-next-line
   }, []);
 
   const handleChange = (e) => {
@@ -111,7 +111,11 @@ export default function CreateActivity() {
             </label>
           </p>
           <p>
-            <input type="submit" value="Create your Activity!" />
+            <input
+              type="submit"
+              value="Create your Activity!"
+              className="submitActivity"
+            />
           </p>
         </form>
       </div>

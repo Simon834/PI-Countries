@@ -6,3 +6,10 @@ ul {
 li {
   margin: 20px;
 }
+
+.homeContainer {
+  background-image: url("https://thumbs.dreamstime.com/b/travel-seamless-pattern-tourism-seamless-background-travel-seamless-pattern-tourism-seamless-background-vector-illustration-135406671.jpg");
+}
+.paginationContainer {
+  width: 600px;
+}

@@ -3,6 +3,9 @@ import { useState } from "react";
 import { getCountries, getCountriesName } from "../../actions";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import logo from "../../auxfiles/logo.png";
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -21,28 +24,34 @@ export default function NavBar() {
     e.target.reset();
     setSearch("");
   };
-  const handleCountries = (e) => {
-    e.preventDefault();
-    dispatch(getCountries());
-  };
+  // const handleCountries = (e) => {
+  //   e.preventDefault();
+  //   dispatch(getCountries());
+  // };
   return (
     <>
       <div className="NavBar">
         <Link to="/home">
-          <div>Home!!!!</div>
+          <img src={logo} alt="" className="logo" />
         </Link>
-        <button onClick={(e) => handleCountries(e)}>get Countries</button>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <input
-            type="text"
-            placeholder="Type a country name..."
-            onChange={(e) => handleChange(e)}
-          />
-          <input type="submit" value="Search" />
-        </form>
         <Link to="/createactivity">
           <div>Create your own Activity!</div>
         </Link>
+
+        <form action="search" onSubmit={handleSubmit}>
+          <div className="searchBox">
+            <input
+              className="searchInput"
+              type="text"
+              name=""
+              placeholder="Search"
+              onChange={handleChange}
+            />
+            <button className="searchButton" type="submit">
+              <FontAwesomeIcon icon={faSearch} />
+            </button>
+          </div>
+        </form>
       </div>
     </>
   );

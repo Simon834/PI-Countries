@@ -1,11 +1,7 @@
-import {
-  getActivities,
-  getCountries,
-  getRegions,
-  orderFilter,
-} from "../../actions";
+import { getActivities, getRegions, orderFilter } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import "./options.css";
 
 export default function Options() {
   const dispatch = useDispatch();
@@ -14,7 +10,7 @@ export default function Options() {
 
   useEffect(() => {
     dispatch(getActivities());
-    dispatch(getRegions());
+    dispatch(getRegions()); // eslint-disable-next-line
   }, []);
 
   const handleOrder = (e) => {
@@ -23,37 +19,44 @@ export default function Options() {
   };
 
   const handleFilter = async (e) => {
+    console.log(e);
     dispatch(orderFilter(e.target.name, e.target.value));
   };
 
   return (
     <>
-      <div>
-        Order by:
-        <select name="Orders" id="" onChange={handleOrder}>
-          <option value="Default" hidden selected disabled>
-            Choose one...
-          </option>
-          <option value="Allorder">Default</option>
-          <option value="nameAZ">Name: A-Z</option>
-          <option value="nameZA">Name: Z-A</option>
-          <option value="popH2L">Population: High to Low</option>
-          <option value="popL2H">Population: Low to High</option>
-        </select>
-        Filter by Continent:
-        <select name="filterRegion" onChange={handleFilter}>
-          <option value="All">All</option>
-          {regions.map((p) => (
-            <option value={p}>{p}</option>
-          ))}
-        </select>
-        Filter by Activity:
-        <select name="filterActivity" onChange={handleFilter}>
-          <option value="All">All</option>
-          {activities.map((p) => (
-            <option value={p}>{p}</option>
-          ))}
-        </select>
+      <div className="optionsContainer">
+        <div className="orderBar">
+          Order by:
+          <select name="Orders" id="orders" onChange={handleOrder}>
+            <option value="Default" hidden selected disabled>
+              Choose one...
+            </option>
+            <option value="Allorder">Default</option>
+            <option value="nameAZ">Name: A-Z</option>
+            <option value="nameZA">Name: Z-A</option>
+            <option value="popH2L">Population: High to Low</option>
+            <option value="popL2H">Population: Low to High</option>
+          </select>
+        </div>
+        <div className="filterReg">
+          Filter by Continent:
+          <select name="filterRegion" onChange={handleFilter}>
+            <option value="All">All</option>
+            {regions.map((p) => (
+              <option value={p}>{p}</option>
+            ))}
+          </select>
+        </div>
+        <div className="filterAct">
+          Filter by Activity:
+          <select name="filterActivity" onChange={handleFilter}>
+            <option value="All">All</option>
+            {activities.map((p) => (
+              <option value={p}>{p}</option>
+            ))}
+          </select>
+        </div>
       </div>
     </>
   );

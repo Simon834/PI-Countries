@@ -1,3 +1,5 @@
+import "./Pagination.css";
+
 export default function Pagination({ postPerPage, totalPosts, paginate }) {
   const pageNumbers = [];
 
@@ -7,10 +9,10 @@ export default function Pagination({ postPerPage, totalPosts, paginate }) {
   return (
     <>
       <div className="paginationContainer">
-        <ul>
+        <ul className="pagination">
           {pageNumbers.map((p) => {
             return (
-              <li key={p}>
+              <li key={p} className="pagination_PageLink">
                 <button onClick={() => paginate(p)}>{p}</button>
               </li>
             );

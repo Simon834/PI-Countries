@@ -1,0 +1,7 @@
+.optionsContainer {
+  justify-content: space-evenly;
+  display: flex;
+}
+select {
+  margin: 5px;
+}
