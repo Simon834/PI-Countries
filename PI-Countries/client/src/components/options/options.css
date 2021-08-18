@@ -1,4 +1,5 @@
 .optionsContainer {
+  margin-top: 15px;
   justify-content: space-evenly;
   display: flex;
 }

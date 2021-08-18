@@ -1,7 +1,26 @@
-.paginationContainer {
-  width: 100%;
-  display: flex;
+nav {
+  max-width: 1500px;
+  margin: 25px;
+  margin-bottom: 25px;
+  font-family: "Poppins", sans-serif;
+  padding: 13px;
 }
-.pagination li {
-  display: flex;
+
+nav button {
+  outline: none;
+  border: none;
+  margin-left: 9px;
+  padding: 9px 12px;
+  font-weight: bold;
+  background-color: #23b5d3;
+  color: #f7f7ff;
+  cursor: pointer;
+  box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.17s ease-in;
+  border-radius: 4px;
+}
+
+nav button:hover {
+  background-color: #ea526f;
+  color: #070600;
 }

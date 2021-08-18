@@ -10,12 +10,10 @@ li {
   text-decoration: none;
 }
 
-.homeContainer {
-  margin-top: 0;
-  height: 200vh;
+/* .homeContainer {
   background-image: url("../../auxfiles/bgpattern.jpg");
   background-size: 300px;
-}
+} */
 .paginationContainer {
   width: 600px;
 }
