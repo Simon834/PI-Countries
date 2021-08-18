@@ -27,7 +27,7 @@ export default function Options() {
     <>
       <div className="optionsContainer">
         <div className="orderBar">
-          Order by:
+          <strong className="orderTitle">Order by:</strong>
           <select name="Orders" id="orders" onChange={handleOrder}>
             <option value="Default" hidden selected disabled>
               Choose one...
@@ -40,7 +40,7 @@ export default function Options() {
           </select>
         </div>
         <div className="filterReg">
-          Filter by Continent:
+          <strong className="orderTitle">Filter by Continent:</strong>
           <select name="filterRegion" onChange={handleFilter}>
             <option value="All">All</option>
             {regions.map((p) => (
@@ -49,7 +49,7 @@ export default function Options() {
           </select>
         </div>
         <div className="filterAct">
-          Filter by Activity:
+          <strong className="orderTitle">Filter by Activity:</strong>
           <select name="filterActivity" onChange={handleFilter}>
             <option value="All">All</option>
             {activities.map((p) => (

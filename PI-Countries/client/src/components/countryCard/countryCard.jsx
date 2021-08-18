@@ -7,13 +7,20 @@ export default function CountryCard(props) {
       <ul className="cards">
         {props.countries.map((p) => (
           <li key={p.ID}>
-            <Link to={`/search/${p.ID}`}>
+            <Link to={`/search/${p.ID}`} className="link-card">
               <div className="card">
-                <div>
-                  <img className="flag" src={p.flagImg} alt={p.name} />
+                <img className="flag" src={p.flagImg} alt={p.name} />
+
+                <div className="cardInfo">
+                  <p className="cardName">{p.name}</p>
+                  <span>
+                    <strong>Region:</strong> {p.region}
+                  </span>
+                  <span>
+                    <strong>Population:</strong>{" "}
+                    {new Intl.NumberFormat().format(p.population)}
+                  </span>
                 </div>
-                <div className="cardName">{p.name}</div>
-                <div>{p.region}</div>
               </div>
             </Link>
           </li>

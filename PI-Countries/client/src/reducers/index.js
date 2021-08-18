@@ -8,7 +8,6 @@ import {
   ORDER_FILTER,
   // POST_ACTIVITY,
 } from "../actions/index";
-import { funcionPrueba } from "./reducerFunctions";
 
 const initialState = {
   countries: [],
@@ -49,27 +48,21 @@ function rootReducer(state = initialState, action) {
           return { ...state, orderedBy: "All" };
         case "nameAZ":
           if (
-            state.filteredByRegion !== "All" &&
-            state.filteredByActivity !== "All"
+            state.filteredByRegion === "All" &&
+            state.filteredByActivity === "All"
           ) {
             return {
               ...state,
-              filteredCountries: [...state.filteredCountries].sort((a, b) =>
+              filteredCountries: [...state.countries].sort((a, b) =>
                 a.name > b.name ? 1 : b.name > a.name ? -1 : 0
               ),
 
               orderedBy: action.payload.type,
             };
           } else {
-            console.log("entre al else");
-            console.log(
-              [...state.countries].sort((a, b) =>
-                a.name > b.name ? 1 : b.name > a.name ? -1 : 0
-              )
-            );
             return {
               ...state,
-              filteredCountries: [...state.countries].sort((a, b) =>
+              filteredCountries: [...state.filteredCountries].sort((a, b) =>
                 a.name > b.name ? 1 : b.name > a.name ? -1 : 0
               ),
 
@@ -78,18 +71,9 @@ function rootReducer(state = initialState, action) {
           }
         case "nameZA":
           if (
-            state.filteredByRegion !== "All" &&
-            state.filteredByActivity !== "All"
+            state.filteredByRegion === "All" &&
+            state.filteredByActivity === "All"
           ) {
-            return {
-              ...state,
-              filteredCountries: [...state.filteredCountries].sort((a, b) =>
-                a.name < b.name ? 1 : b.name < a.name ? -1 : 0
-              ),
-
-              orderedBy: action.payload.type,
-            };
-          } else {
             return {
               ...state,
               filteredCountries: [...state.countries].sort((a, b) =>
@@ -98,15 +82,24 @@ function rootReducer(state = initialState, action) {
 
               orderedBy: action.payload.type,
             };
-          }
-        case "popH2L":
-          if (
-            state.filteredByRegion !== "All" &&
-            state.filteredByActivity !== "All"
-          ) {
+          } else {
             return {
               ...state,
               filteredCountries: [...state.filteredCountries].sort((a, b) =>
+                a.name < b.name ? 1 : b.name < a.name ? -1 : 0
+              ),
+
+              orderedBy: action.payload.type,
+            };
+          }
+        case "popH2L":
+          if (
+            state.filteredByRegion === "All" &&
+            state.filteredByActivity === "All"
+          ) {
+            return {
+              ...state,
+              filteredCountries: [...state.countries].sort((a, b) =>
                 a.population < b.population
                   ? 1
                   : b.population < a.population
@@ -119,7 +112,7 @@ function rootReducer(state = initialState, action) {
           } else {
             return {
               ...state,
-              filteredCountries: [...state.countries].sort((a, b) =>
+              filteredCountries: [...state.filteredCountries].sort((a, b) =>
                 a.population < b.population
                   ? 1
                   : b.population < a.population
@@ -133,12 +126,12 @@ function rootReducer(state = initialState, action) {
 
         case "popL2H":
           if (
-            state.filteredByRegion !== "All" &&
-            state.filteredByActivity !== "All"
+            state.filteredByRegion === "All" &&
+            state.filteredByActivity === "All"
           ) {
             return {
               ...state,
-              filteredCountries: [...state.filteredCountries].sort((a, b) =>
+              filteredCountries: [...state.countries].sort((a, b) =>
                 a.population > b.population
                   ? 1
                   : b.population > a.population
@@ -151,7 +144,7 @@ function rootReducer(state = initialState, action) {
           } else {
             return {
               ...state,
-              filteredCountries: [...state.countries].sort((a, b) =>
+              filteredCountries: [...state.filteredCountries].sort((a, b) =>
                 a.population > b.population
                   ? 1
                   : b.population > a.population
@@ -165,10 +158,16 @@ function rootReducer(state = initialState, action) {
 
         case "filterRegion":
           let region = action.payload.data;
-
-          let filteredRegions = state.countries.filter(
-            (p) => p.region === region
-          );
+          let filteredRegions;
+          if (state.filteredByActivity === "All") {
+            filteredRegions = [...state.countries].filter(
+              (p) => p.region === region
+            );
+          } else {
+            filteredRegions = [...state.filteredCountries].filter(
+              (p) => p.region === region
+            );
+          }
 
           if (region) {
             return {
@@ -182,10 +181,16 @@ function rootReducer(state = initialState, action) {
         case "filterActivity":
           let activity = action.payload.data;
 
-          let filteredActivities = state.countries.filter((p) =>
-            p.activities.includes(activity)
-          );
-
+          let filteredActivities;
+          if (state.filteredByRegion === "All") {
+            filteredActivities = [...state.countries].filter((p) =>
+              p.activities.includes(activity)
+            );
+          } else {
+            filteredActivities = [...state.filteredCountries].filter((p) =>
+              p.activities.includes(activity)
+            );
+          }
           if (activity) {
             return {
               ...state,

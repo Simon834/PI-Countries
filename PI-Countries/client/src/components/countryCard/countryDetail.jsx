@@ -1,14 +1,16 @@
+import ActivityList from "./ActivityList";
 import "./countryDetail.css";
 
 export default function CountryDetail(props) {
   console.log(props);
   return (
     <>
-      <div className="DetailContainer">
-        <img src={props.flagImg} alt="" />
+      <div className="detailCard">
+        <img src={props.flagImg} alt="" className="detailFlag" />
         <p>
-          <h3>{props.name}</h3>
+          <h2 className="detailName">{props.name}</h2>
         </p>
+        <h3>Country info detail:</h3>
         <p>
           <div>Capital city: {props.capital}</div>
         </p>
@@ -21,17 +23,17 @@ export default function CountryDetail(props) {
           <div>Area Code: {props.area}</div>
         </p>
         <p>
-          <div>Population: {props.population}</div>
+          <div>
+            Population: {new Intl.NumberFormat().format(props.population)}
+          </div>
         </p>
         <p>
-          <div>
-            <ul>
+          <ul>
+            <h3 className="actHead">
               Here is a list of activities you can check during your visit:
-              {props.activities.map((p) => {
-                return <li key={p.ID}>{p.name}</li>; //iashfoai
-              })}
-            </ul>
-          </div>
+            </h3>
+            <ActivityList activities={props.activities} />
+          </ul>
         </p>
       </div>
     </>

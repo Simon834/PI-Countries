@@ -47,10 +47,12 @@ export default function CreateActivity() {
               name="name"
               placeholder="Activity Name"
               onChange={(e) => handleChange(e)}
+              className="fromText"
+              required
             />
           </p>
           <p>
-            In a scale from 1 - 5, how difficult is this activity:
+            In a scale from 1 - 5, how difficult is this activity:{" "}
             <input
               type="number"
               name="difficulty"
@@ -58,23 +60,27 @@ export default function CreateActivity() {
               onChange={(e) => handleChange(e)}
               max={5}
               min={1}
-              defaultValue=""
             />
           </p>
           <p>
-            How long will it take to complete this activity:
+            How long will it take to complete this activity:{" "}
             <input
               type="text"
               name="duration"
               placeholder="Duration (mins)"
               onChange={(e) => handleChange(e)}
+              className="formText"
             />
           </p>
           <p>
             <label>
               Pick a Season for your Activity:
-              <select onChange={(e) => handleChange(e)} name="season">
-                <option disabled selected hidden>
+              <select
+                onChange={(e) => handleChange(e)}
+                name="season"
+                defaultValue="default"
+              >
+                <option disabled hidden value="default">
                   Choose One
                 </option>
                 <option value="Summer" key="Summer">
@@ -99,6 +105,7 @@ export default function CreateActivity() {
                 name="countries"
                 multiple="multiple"
                 onChange={(e) => handleCountries(e)}
+                required
               >
                 {countries.map((p) => {
                   return (

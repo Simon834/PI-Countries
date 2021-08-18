@@ -133,7 +133,13 @@ router.get("/:idPais", async (req, res, next) => {
       region,
       subregion,
       activities: activities.map((p) => {
-        return { name: p.name, ID: p.ID };
+        return {
+          name: p.name,
+          ID: p.ID,
+          difficulty: p.difficulty,
+          duration: p.duration,
+          season: p.season,
+        };
       }),
       flagImg,
       capital,

@@ -1,10 +1,30 @@
-.DetailContainer {
-  display: inline-block;
-  justify-content: center;
-  justify-self: center;
-  border: solid 2px;
-  height: fit-content;
-  width: fit-content;
-  padding: auto;
+.detailCard {
+  width: 700px;
+  border: solid 2px #ea526f;
   margin-top: 50px;
+  background-color: #f7f7ff;
+  margin-left: 37%;
+}
+.detailCard img {
+  height: 285px;
+  width: 450px;
+  object-fit: cover;
+  padding: 10px;
+  margin-left: 15%;
+}
+.detailFlag {
+  height: 50%;
+}
+.detailCard p,
+h3 {
+  margin: 10px;
+}
+.detailName {
+  display: flex;
+  justify-content: center;
+}
+.detailActivities ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }

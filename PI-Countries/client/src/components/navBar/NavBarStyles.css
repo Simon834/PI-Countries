@@ -55,11 +55,19 @@
 
 @media screen and (max-width: 620px) {
   .searchBox:hover > .searchInput {
-    width: 150px;
+    width: 50px;
     padding: 0 6px;
   }
 }
 .logo {
   height: 40px;
   object-fit: contain;
+}
+
+.linkAct {
+  position: absolute;
+  text-decoration: none;
+  color: #f7f7ff;
+  font-size: 22px;
+  margin-left: 20px;
 }

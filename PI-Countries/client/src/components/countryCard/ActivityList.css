@@ -1,0 +1,28 @@
+.activityList {
+  margin-right: 8px;
+  display: grid;
+  grid-gap: 1px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.actCard {
+  border: grey 1px solid;
+  border-radius: 10px;
+  margin: 3px;
+}
+.actName {
+  display: flex;
+  justify-content: center;
+}
+.actInfo {
+  display: flex;
+  justify-content: space-around;
+}
+.actDetail {
+  padding: 5px;
+}
+.actDetailMid {
+  padding: 5px;
+  border-right: gray solid 1px;
+  border-left: gray solid 1px;
+}
