@@ -39,3 +39,6 @@ body {
 .submitActivity:hover {
   background-color: #279af1;
 }
+.danger {
+  color: red;
+}

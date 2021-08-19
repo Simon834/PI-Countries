@@ -2,9 +2,22 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries, postActivity } from "../../actions";
 import "./createActivityStyles.css";
+import { validate } from "./validate";
 
 export default function CreateActivity() {
-  const [newActivity, setnewActivity] = useState({ countries: [] });
+  const [newActivity, setnewActivity] = useState({
+    name: "",
+    difficulty: "",
+    duration: "",
+    season: "",
+    countries: [],
+  });
+  const [errors, setErrors] = useState({
+    name: "",
+    difficulty: "",
+    duration: "",
+    season: "",
+  });
 
   const countries = useSelector((state) => state.countries);
   const dispatch = useDispatch();
@@ -18,14 +31,25 @@ export default function CreateActivity() {
       ...newActivity,
       [e.target.name]: e.target.value,
     });
+
+    setErrors(
+      validate({
+        ...newActivity,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postActivity(newActivity));
-    e.target.reset();
-    setnewActivity({});
-    alert("Activity created! awesome!");
+    if (Object.keys(errors).length === 0) {
+      dispatch(postActivity(newActivity));
+      e.target.reset();
+      setnewActivity({});
+      alert("Activity created! awesome!");
+    } else {
+      alert("Check the required fields");
+    }
   };
 
   const handleCountries = (e) => {
@@ -33,9 +57,14 @@ export default function CreateActivity() {
       ...newActivity,
       [e.target.name]: Array.from(e.target.selectedOptions).map((p) => p.value),
     });
-    console.log(e);
+    setErrors(
+      validate({
+        ...newActivity,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
-  console.log(newActivity);
+
   return (
     <>
       <div className="formContainer">
@@ -51,6 +80,7 @@ export default function CreateActivity() {
               required
             />
           </p>
+          {errors.name && <p className="danger">{errors.name}</p>}
           <p>
             In a scale from 1 - 5, how difficult is this activity:{" "}
             <input
@@ -62,6 +92,7 @@ export default function CreateActivity() {
               min={1}
             />
           </p>
+          {errors.difficulty && <p className="danger">{errors.difficulty}</p>}
           <p>
             How long will it take to complete this activity:{" "}
             <input
@@ -72,6 +103,7 @@ export default function CreateActivity() {
               className="formText"
             />
           </p>
+          {errors.duration && <p className="danger">{errors.duration}</p>}
           <p>
             <label>
               Pick a Season for your Activity:
@@ -96,8 +128,10 @@ export default function CreateActivity() {
                   Spring
                 </option>
               </select>
+              {errors.season && <p className="danger">{errors.season}</p>}
             </label>
           </p>
+
           <p>
             <label>
               Choose the countries in wich your activity is available:
@@ -117,6 +151,7 @@ export default function CreateActivity() {
               </select>
             </label>
           </p>
+          {errors.countries && <p className="danger">{errors.countries}</p>}
           <p>
             <input
               type="submit"
